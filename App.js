@@ -22,7 +22,22 @@ class App extends Component {
   render() {
     return (
       <NavigationContainer>
-        <stack.Navigator initialRouteName="Home">
+        <stack.Navigator 
+        initialRouteName="Home"
+
+        // 모든 스타일에 공통으로 스타일을 적용시킬수 있다. (screenOptions)
+        // 공통적으로 옵션을 지정해도 각 스크린별로 수정이 가능하다.
+          screenOptions={{
+              headerStyle: {
+                  backgroundColor: 'black'
+              },
+              headerTintColor: 'gold',
+              headerTintStyle: {
+                fontWeight: 'bold',
+                color: 'brown'
+              }
+          }}
+        >
           <stack.Screen
             name="Home"
             component={HomeScreen} 
@@ -37,18 +52,18 @@ class App extends Component {
               userName: 'Sungjin',
               userLastName: 'Jin'
             }}
-          //   options={{
-          //     title: 'User',
-          //     // 초기 설정 가능 데이터 초기 설정 가능한것과 똑같다.
-          //     headerStyle: {
-          //         backgroundColor: 'green'
-          //     },
-          //     headerTintColor: 'yellow',
-          //     headerTintStyle: {
-          //       fontWeight: 'bold',
-          //       color: 'purple'
-          //     }
-          // }}
+            options={{
+              title: 'User',
+              // 초기 설정 가능 데이터 초기 설정 가능한것과 똑같다.
+              headerStyle: {
+                  backgroundColor: 'green'
+              },
+              headerTintColor: 'yellow',
+              headerTintStyle: {
+                fontWeight: 'bold',
+                color: 'purple'
+              }
+          }}
           />
           {/* 유저루트 및 초기값 설정 */}
 
