@@ -16,19 +16,28 @@ class UserScreen extends Component {
           {
                     title: 'Customizing',
                     headerStyle: {
-                        backgroundColor: 'blue'
+                        backgroundColor: 'purple'
                     },
                     headerTintColor: 'yellow',
                     headerTintStyle: {
                       fontWeight: 'bold',
-                      color: 'green'
-                    }
+                      color: 'white'
+                    },
+                    headerBackTitle: 'Back',
+                    headerRight: () => (
+                        <Button 
+                            title= "Go Home"
+                            onPress={() => {
+                                this.props.navigation.navigate('Home')
+                            }}
+                        />
+                    )
                 }
         )
     }
 
     render() {
-        // this.headerStyle()
+        this.headerStyle()
         const {params} = this.props.route;
         const userIdx = params ? params.userIdx : null;
         const userName = params ? params.userName : null;
