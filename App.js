@@ -7,18 +7,29 @@
  */
 
 import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Image, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './src/home';
 import UserScreen from './src/user';
 import TestScreen from './src/test';
+import Logo from './src/logo';
 
 const stack = createNativeStackNavigator();
 // screen and navigator property return ㅎㅐ줌.
 // stack.screen 콤퍼넌트에 다 props로 내려준다 자동으로. 하위 컴포넌트에서 사용가능.
 
 class App extends Component {
+
+  // logoTitle = () => {
+  //   return(
+  //     <Image
+  //       style={{width: 40, height: 40}}
+  //       source={require('./src/assets/pics/home.png')}
+  //     />
+  //   )
+  // } 왜 안됨??
+
   render() {
     return (
       <NavigationContainer>
@@ -29,19 +40,40 @@ class App extends Component {
         // 공통적으로 옵션을 지정해도 각 스크린별로 수정이 가능하다.
           screenOptions={{
               headerStyle: {
-                  backgroundColor: 'black'
+                  backgroundColor: 'pink'
               },
               headerTintColor: 'gold',
               headerTintStyle: {
                 fontWeight: 'bold',
                 color: 'brown'
-              }
+              },
+              headerTitle: () => (
+                <Image style={{width: 40, height: 40}}
+                source={require('./src/assets/pics/home.png')}
+                />
+              )
           }}
         >
           <stack.Screen
             name="Home"
             component={HomeScreen} 
-            options={{title: 'Con-Fin'}} // 헤더바 변경
+            options={{
+              title: 'Home Screen',
+              headerTitle: () => (
+                <Image style={{width: 40, height: 40}}
+                source={require('./src/assets/pics/home.png')}
+                />
+              ),
+              // header right 부분에 버튼 생성해주기
+              headerRight: () => (
+                <Button
+                title= 'Info'
+                onPress={() => {
+                  alert('hello!')
+                }}
+                />
+              )
+            }} // 헤더바 변경
             />
           {/* 홈루트 */}
           <stack.Screen
@@ -62,7 +94,7 @@ class App extends Component {
               headerTintStyle: {
                 fontWeight: 'bold',
                 color: 'purple'
-              }
+              },
           }}
           />
           {/* 유저루트 및 초기값 설정 */}
@@ -77,3 +109,4 @@ class App extends Component {
 export default App;
 
 // 데이터를 보내는걸 네이티브에서는 파라미터를 루트로 패싱한다라고 말한다.
+// https://reactnavigation.org/docs/native-stack-navigator#options
