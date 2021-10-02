@@ -36,27 +36,27 @@ const Drawer = createDrawerNavigator();
 // drawer 사용시
 // https://reactnavigation.org/docs/drawer-navigator#installation
 
-CustomDrawerContent = (props) => {
-  return (
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
-      <DrawerItem
-        label="Help"
-        onPress={() => Linking.openURL('http://www.google.com')}
-        icon={() => <LogoTitle/>}
-      />
-    </DrawerContentScrollView>
-  )
-}
+// CustomDrawerContent = (props) => {
+//   return (
+//     <DrawerContentScrollView {...props}>
+//       <DrawerItemList {...props} />
+//       <DrawerItem
+//         label="Help"
+//         onPress={() => Linking.openURL('http://www.google.com')}
+//         icon={() => <LogoTitle />}
+//       />
+//     </DrawerContentScrollView>
+//   )
+// }
 
-LogoTitle = () => {
-  return(
-    <Image
-      style={{width: 40, height: 40}}
-      source={require('./src/assets/pics/home.png')}
-    />
-  )
-}
+// LogoTitle = () => {
+//   return (
+//     <Image
+//       style={{ width: 40, height: 40 }}
+//       source={require('./src/assets/pics/home.png')}
+//     />
+//   )
+// }
 
 class App extends Component {
 
@@ -65,10 +65,10 @@ class App extends Component {
     return (
       <NavigationContainer>
         <Drawer.Navigator
-          initialRouteName="Home"
+          initialRouteName="home"
           screenOptions={{
             drawerType: 'front',
-            drawerPosition: 'left',
+            drawerPosition: 'right',
             drawerStyle: {
               backgroundColor: '#c6cbef',
               width: 200,
@@ -77,17 +77,17 @@ class App extends Component {
           // drawerContent={(props) => <CustomDrawerContent {...props} />}
           drawerContent={(props) => <SdieDrawer {...props} />}
         >
-          <Drawer.Screen 
-          name="Home" 
-          component={DrawerHomeScreen}
-          options={{
-            drawerIcon: () => (
-              <Image 
-                source={Picture}
-                style={{width: 40, height: 40}}
-              />
-            )
-          }}
+          <Drawer.Screen
+            name="Home"
+            component={DrawerHomeScreen}
+            options={{
+              drawerIcon: () => (
+                <Image
+                  source={Picture}
+                  style={{ width: 40, height: 40 }}
+                />
+              )
+            }}
           />
           <Drawer.Screen name="User" component={DrawerUserScreen} />
         </Drawer.Navigator>
