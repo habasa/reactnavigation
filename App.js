@@ -17,6 +17,8 @@ import {
   DrawerItemList,
   DrawerItem
 } from '@react-navigation/drawer'; // drawer사용시
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import HomeScreen from './src/home';
 import UserScreen from './src/user';
 import TestScreen from './src/test';
@@ -26,6 +28,10 @@ import DrawerUserScreen from './src/user_drawer'
 import Logo from './src/logo';
 import Picture from './src/assets/pics/home.png'
 import SdieDrawer from './src/my_drawer'
+
+import TabHomeScreen from './src/home_tab';
+import TabUserScreen from './src/user_tab';
+import TabMessageScreen from './src/message_tab';
 
 const stack = createNativeStackNavigator();
 // stack 사용시 (Stack으로 쓰자 대문자로..)
@@ -49,6 +55,8 @@ const Drawer = createDrawerNavigator();
 //   )
 // }
 
+const Tab = createBottomTabNavigator();
+
 // LogoTitle = () => {
 //   return (
 //     <Image
@@ -58,40 +66,93 @@ const Drawer = createDrawerNavigator();
 //   )
 // }
 
-class App extends Component {
+const TabBarIcon = (focused, name) => {
+  let iconImage;
 
+  if(name === 'Home') {
+    iconImage = require('./src/assets/pics/home.png')
+  } else if(name === 'User') {
+    iconImage = require('./src/assets/pics/user.png')
+  } else if(name === 'Message') {
+    iconImage = require('./src/assets/pics/message.png')
+  }
+  return (
+    <Image
+      style={{
+        width: focused ? 30 : 20,
+        height: focused ? 30 : 20
+      }}
+      source = {iconImage}
+    />
+  )
+}
+
+class App extends Component {
 
   render() {
     return (
       <NavigationContainer>
-        <Drawer.Navigator
-          initialRouteName="home"
-          screenOptions={{
-            drawerType: 'front',
-            drawerPosition: 'right',
-            drawerStyle: {
-              backgroundColor: '#c6cbef',
-              width: 200,
-            }
-          }}
-          // drawerContent={(props) => <CustomDrawerContent {...props} />}
-          drawerContent={(props) => <SdieDrawer {...props} />}
+        <Tab.Navigator
+          initialRouteName="Home"
+          screenOptions={({ route }) => ({
+            tabBarLabel: route.name,
+            tabBarIcon: ({ focused }) => (
+              TabBarIcon(focused, route.name)
+            ),
+            tabBarActiveBackgroundColor: 'skyblue',
+            tabBarActiveTintColor: 'blue',
+            tabBarInactiveTintColor: '#fff',
+            tabBarStyle: {
+              backgroundColor: '#c6cbef'
+            },
+            tabBarLabelPosition: 'below-icon'
+          })}
         >
-          <Drawer.Screen
-            name="Home"
-            component={DrawerHomeScreen}
-            options={{
-              drawerIcon: () => (
-                <Image
-                  source={Picture}
-                  style={{ width: 40, height: 40 }}
-                />
-              )
-            }}
-          />
-          <Drawer.Screen name="User" component={DrawerUserScreen} />
-        </Drawer.Navigator>
+          <Tab.Screen name="Home" component={TabHomeScreen} />
+          <Tab.Screen name="User" component={TabUserScreen} />
+          <Tab.Screen name="Message" component={TabMessageScreen} />
+        </Tab.Navigator>
       </NavigationContainer>
+
+
+
+
+
+      // <NavigationContainer>
+      //   <Drawer.Navigator
+      //     initialRouteName="home"
+      //     screenOptions={{
+      //       drawerType: 'front',
+      //       drawerPosition: 'right',
+      //       drawerStyle: {
+      //         backgroundColor: '#c6cbef',
+      //         width: 200,
+      //       }
+      //     }}
+      //     // drawerContent={(props) => <CustomDrawerContent {...props} />}
+      //     drawerContent={(props) => <SdieDrawer {...props} />}
+      //   >
+      //     <Drawer.Screen
+      //       name="Home"
+      //       component={DrawerHomeScreen}
+      //       options={{
+      //         drawerIcon: () => (
+      //           <Image
+      //             source={Picture}
+      //             style={{ width: 40, height: 40 }}
+      //           />
+      //         )
+      //       }}
+      //     />
+      //     <Drawer.Screen name="User" component={DrawerUserScreen} />
+      //   </Drawer.Navigator>
+      // </NavigationContainer>
+
+
+
+
+
+
 
       // <NavigationContainer>
       //   <stack.Navigator 

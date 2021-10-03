@@ -16,6 +16,7 @@ class SideDrawer extends Component {
 
     navigateToScreen = (route) => () => {
         // arrow function 두번쓰는거 왜그런지 확인하기.
+        // https://www.google.com/search?q=%EC%B9%B4%EB%A0%88%ED%95%A8%EC%88%98&sxsrf=AOaemvJtUc-gcYJFUrwijjGRF02Km-GMbQ%3A1633184999123&ei=52xYYfv1Bo3l0ATF5aGIAQ&ved=0ahUKEwi7head-KvzAhWNMpQKHcVyCBEQ4dUDCA4&uact=5&oq=%EC%B9%B4%EB%A0%88%ED%95%A8%EC%88%98&gs_lcp=Cgdnd3Mtd2l6EAM6CAgAEIAEELEDOgUIABCABDoLCAAQgAQQsQMQgwFKBAhBGABQ2wtY5hFguRRoAnAAeAKAAZABiAHICZIBAzAuOZgBAKABAcABAQ&sclient=gws-wiz
         this.props.navigation.dispatch(
             CommonActions.navigate({
                 name: route,
