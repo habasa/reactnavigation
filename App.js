@@ -33,6 +33,9 @@ import TabHomeScreen from './src/home_tab';
 import TabUserScreen from './src/user_tab';
 import TabMessageScreen from './src/message_tab';
 
+import Icon from 'react-native-vector-icons/dist/Ionicons';
+import Ionicons from 'react-native-vector-icons/dist/Ionicons';
+
 const stack = createNativeStackNavigator();
 // stack 사용시 (Stack으로 쓰자 대문자로..)
 // screen and navigator property return ㅎㅐ줌.
@@ -67,23 +70,33 @@ const Tab = createBottomTabNavigator();
 // }
 
 const TabBarIcon = (focused, name) => {
-  let iconImage;
+  // let iconImage;
+  let iconName, iconSize;
 
   if(name === 'Home') {
-    iconImage = require('./src/assets/pics/home.png')
+    iconName="home-outline"
+    // iconImage = require('./src/assets/pics/home.png')
   } else if(name === 'User') {
-    iconImage = require('./src/assets/pics/user.png')
+    iconName="people-outline"
+    // iconImage = require('./src/assets/pics/user.png')
   } else if(name === 'Message') {
-    iconImage = require('./src/assets/pics/message.png')
+    iconName="mail-outline"
+    // iconImage = require('./src/assets/pics/message.png')
   }
+
+  iconSize = focused ? 30 : 20
   return (
-    <Image
-      style={{
-        width: focused ? 30 : 20,
-        height: focused ? 30 : 20
-      }}
-      source = {iconImage}
+    <Ionicons 
+      name={iconName}
+      size={iconSize}
     />
+    // <Image
+    //   style={{
+    //     width: focused ? 30 : 20,
+    //     height: focused ? 30 : 20
+    //   }}
+    //   source = {iconImage}
+    // />
   )
 }
 
